@@ -1,10 +1,10 @@
-#ifndef _TEXTURES_H_
-#define _TEXTURES_H_
+#ifndef _TEXTURE_H_
+#define _TEXTURE_H_
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-class TextureContainer
+class Texture
 {
 public:
 	enum Type
@@ -26,4 +26,4 @@ private:
 
 
 
-#endif // !_TEXTURES_H_
+#endif // !_TEXTURE_H_

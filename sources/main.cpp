@@ -1,13 +1,13 @@
 #include <SFML/Graphics.hpp>
-#include "TextureContainer.h"
+#include "Texture.h"
 
 int main()
 {
 	sf::RenderWindow window(sf::VideoMode(500, 500), "SFML works!");
 
-	TextureContainer::add(TextureContainer::example1);
+	Texture::add(Texture::example1);
 	sf::Sprite sprite;
-	sprite.setTexture(*TextureContainer::textures[TextureContainer::example1]);
+	sprite.setTexture(*Texture::textures[Texture::example1]);
 	sprite.setPosition(sf::Vector2f(20, 20));
 	sprite.scale(sf::Vector2f(0.1f, 0.1f));
 	
@@ -18,23 +18,28 @@ int main()
 		{
 			if (event.type == sf::Event::Closed)
 				window.close();
-			else if (event.type == sf::Event::KeyPressed)
+			else if (event.type == sf::Event::KeyReleased)
 			{
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+				if (event.key.code == sf::Keyboard::D)
 				{
-					TextureContainer::debug();
+					Texture::debug();
+				}
+				else if (event.key.code == sf::Keyboard::A)
+				{
+					Texture::add(Texture::example1);
+				}
+				else if (event.key.code == sf::Keyboard::Z)
+				{
+					Texture::add(Texture::example2);
+				}
+				else if (event.key.code == sf::Keyboard::R)
+				{
+					Texture::remove(Texture::example1);
 				}
 			}
 		}
 
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-		{
-			TextureContainer::add(TextureContainer::example1);
-		}
-		else if (sf::Keyboard::isKeyPressed(sf::Keyboard::R))
-		{
-			TextureContainer::remove(TextureContainer::example1);
-		}
+		
 
 		window.clear();
 		window.draw(sprite);

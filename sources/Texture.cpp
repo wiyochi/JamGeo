@@ -1,9 +1,9 @@
-#include "TextureContainer.h"
+#include "Texture.h"
 
-std::map<TextureContainer::Type, sf::Texture*> TextureContainer::textures;
-std::map<TextureContainer::Type, int> TextureContainer::counts;
+std::map<Texture::Type, sf::Texture*> Texture::textures;
+std::map<Texture::Type, int> Texture::counts;
 
-void TextureContainer::add(Type type)
+void Texture::add(Type type)
 {
 	if (!textures[type])
 	{
@@ -13,7 +13,7 @@ void TextureContainer::add(Type type)
 	counts[type] += 1;
 }
 
-void TextureContainer::remove(Type type)
+void Texture::remove(Type type)
 {
 	if (counts[type] != 0)
 	{
@@ -21,21 +21,22 @@ void TextureContainer::remove(Type type)
 		if (counts[type] == 0)
 		{
 			delete textures[type];
+			textures[type] = nullptr;
 		}
 	}
 }
 
-void TextureContainer::debug()
+void Texture::debug()
 {
 	std::cout << "TEXTURE CONTAINER:" << std::endl << "Textures:" << std::endl;
 	for (std::pair<Type, int> count : counts)
 	{
 		switch (count.first)
 		{
-		case TextureContainer::example1:
+		case Texture::example1:
 			std::cout << "example1: ";
 			break;
-		case TextureContainer::example2:
+		case Texture::example2:
 			std::cout << "example2: ";
 			break;
 		default:
@@ -45,15 +46,15 @@ void TextureContainer::debug()
 	}
 }
 
-std::string TextureContainer::typeToString(Type t)
+std::string Texture::typeToString(Type t)
 {
 	std::string stringType;
 	switch (t)
 	{
-	case TextureContainer::example1:
+	case Texture::example1:
 		stringType = "resources/textures/example1.jpg";
 		break;
-	case TextureContainer::example2:
+	case Texture::example2:
 		stringType = "resources/textures/example2.jpg";
 		break;
 	default:
