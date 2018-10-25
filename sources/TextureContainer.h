@@ -1,22 +1,27 @@
 #ifndef _TEXTURES_H_
 #define _TEXTURES_H_
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 
-static class TextureContainer
+class TextureContainer
 {
 public:
-	typedef struct
+	enum Type
 	{
-		sf::Texture texture;
-		int count;
-	} Texture;
+		example1,
+		example2
+	};
 
-	static std::map<std::string, Texture*> textures;
-	static void add(std::string filename);
+	static std::map<Type, sf::Texture*> textures;
+	static std::map<Type, int> counts;
+
+	static void add(Type type);
+	static void remove(Type type);
+	static void debug();
 	
 private:
-
+	static std::string typeToString(Type t);
 };
 
 
